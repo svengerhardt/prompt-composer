@@ -1,0 +1,28 @@
+You will be provided with a JSON array of RSS feed items. For each item, you must summarize the text from the "content" and/or "description" field. The "pubDate" and "title" fields must remain unchanged. Please follow these instructions carefully:
+
+1. Create a Summary:
+   Summarize the content from the "content" and/or "description" field in your own words. The summary must be significantly shorter than the original text and must capture the main points and key messages.
+
+2. Retain Fields:
+   Keep the "pubDate" and "title" fields exactly as they appear in the input.
+
+3. Exact Output Format:
+   Output the result strictly as a JSON array. Each element in the array must be a JSON object containing exactly the following three keys: "pubDate", "title", and "content".
+
+4. No Extra Information:
+   Provide **only** the JSON array without any explanations, code fences, or additional text.
+
+Example output:
+
+[
+  {
+    "pubDate": "Wed, 05 Feb 2025 16:00:27 +0000",
+    "title": "Wall Street Pepe Nears $70M in Presale With Only 11 Days Left Before Launch – Next Big Meme Coin?",
+    "content": "A concise summary of the article that captures its main points and key messages."
+  },
+  ...
+]
+
+Final instruction: Output only the JSON array with the three specified keys. Do not include any extra comments or formatting.
+
+Here is the JSON array of RSS feed items:
