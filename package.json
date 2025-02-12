@@ -10,6 +10,7 @@
   "type": "module",
   "scripts": {
     "build": "tsc",
+    "prepare": "npm run build",
     "format": "prettier --write ./src",
     "check-format": "prettier --check ./src",
     "check-exports": "attw --pack . --ignore-rules=cjs-resolves-to-esm",
