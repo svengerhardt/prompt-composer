@@ -6,16 +6,18 @@ Construct dynamic and context-rich prompts for large language models (LLMs).
 
 ### Building a Prompt
 
-Construct a prompt by setting a starting string, adding multiple prompt components, and appending an ending string.
+Construct a prompt by adding multiple prompt components.
 
 ```typescript
 import { PromptComposer, FileReaderComponent } from 'prompt-composer';
 
 async function buildPrompt() {
   const promptComposer = new PromptComposer();
-
-  promptComposer.setStart('Examine all the stocks mentioned in the CSV document and select the five most interesting for a long trade');
-
+  
+  promptComposer.addComponent(new TextComponent({
+    content: 'Please examine all the stocks mentioned in the CSV document and select the five most interesting for a long trade'
+  }));
+  
   promptComposer.addComponent(new FileReaderComponent({
     path: '../resources/stocks.csv'
   }));
@@ -29,7 +31,9 @@ buildPrompt();
 
 ### Chat Integration
 
-The module provides chat providers to send the composed prompt to an LLM and stream the response. The ChatClient class wraps around a chosen chat provider.
+The module provides chat providers to send the composed prompt to an LLM. The ChatClient class wraps around a chosen chat provider.
+
+**Streaming**
 
 ```typescript
 import { ChatClient, OllamaProvider } from 'prompt-composer';
@@ -48,9 +52,43 @@ async function chatExample(prompt: string) {
 // chatExample(yourComposedPrompt);
 ```
 
+**Structured Output**
+
+```typescript
+import { z } from "zod";
+import { ChatClient, OpenAIProvider } from 'prompt-composer';
+
+async function chatExample(prompt: string) {
+  const chatClient = new ChatClient(new OpenAIProvider({
+    model: 'gpt-4o'
+  }));
+  
+  const joke = z.object({
+    setup: z.string().describe("The setup of the joke"),
+    punchline: z.string().describe("The punchline to the joke"),
+    rating: z.number().optional().describe("How funny the joke is, from 1 to 10"),
+  });
+  
+  let result = await chatClient.invokeWithStructuredOutput(prompt, joke);
+  console.log(result);
+}
+
+// chatExample('Tell me a joke about cats');
+```
+
+Result
+
+```json
+{
+  "setup": "Why don't cats play poker in the wild?", 
+  "punchline": "Too many cheetahs.", 
+  "rating": 7
+}
+```
+
 ### Content Post Processing
 
-The `ContentPostProcessor` allows to modify or transform the content of an existing prompt component after it has been generated.
+The `ContentPostProcessor` allows you to modify or transform the content of an existing prompt component after it has been generated.
 
 ```typescript
 promptComposer.addComponent(new ContentPostProcessor(
