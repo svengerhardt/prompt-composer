@@ -9,7 +9,7 @@ Construct dynamic and context-rich prompts for large language models (LLMs).
 Construct a prompt by adding multiple prompt components.
 
 ```typescript
-import { PromptComposer, FileReaderComponent } from 'prompt-composer';
+import { PromptComposer, FileReaderComponent, TextComponent } from 'prompt-composer';
 
 async function buildPrompt() {
   const promptComposer = new PromptComposer();
@@ -31,7 +31,7 @@ buildPrompt();
 
 ### Chat Integration
 
-The module provides chat providers to send the composed prompt to an LLM. The ChatClient class wraps around a chosen chat provider.
+The module provides chat providers to send the composed prompt to an LLM. The `ChatClient` class wraps around a chosen chat provider.
 
 **Streaming**
 
