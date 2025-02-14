@@ -1,0 +1,31 @@
+JSON Output Requirements
+
+At the end of your analysis, you must produce your final recommendation exclusively in JSON format with the following keys:
+    1. probability_of_success (number or percentage indicating the likelihood of a successful new order)
+    2. open_new_order (boolean or yes/no indicating whether to open a trade)
+    3. explanation (a concise summary of why you recommend opening or not opening a new trade)
+    4. direction (“long” or “short” if a new order is recommended; otherwise null or an empty string)
+
+Example JSON Output (if recommending a long position):
+
+{
+    "probabilityOfSuccess": 75,
+    "openNewOrder": true,
+    "explanation": "Based on strong RSI and MACD bullish crossover, along with rising volume, I recommend opening a new long position.",
+    "direction": "long"
+}
+
+Example JSON Output (if not recommending any new order):
+
+{
+    "probabilityOfSuccess": 40,
+    "openNewOrder": false,
+    "explanation": "RSI is overbought and the price is near a major resistance level with low volume, indicating caution. No new order recommended.",
+    "direction": null
+}
+
+Final instruction:
+
+You must produce only the JSON object with the keys listed above.
+Do not include any explanation, code fence, or additional text outside the JSON.
+Any extra text outside the JSON will break the parser.

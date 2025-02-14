@@ -23,6 +23,10 @@ Example output:
   ...
 ]
 
-Final instruction: Output only the JSON array with the three specified keys. Do not include any extra comments or formatting.
+Final instruction:
+
+Output only the JSON array with the three specified keys.
+Do not include any explanation, code fence, or additional text outside the JSON.
+Any extra text outside the JSON will break the parser.
 
 Here is the JSON array of RSS feed items:
