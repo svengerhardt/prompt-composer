@@ -3,6 +3,7 @@
 import type { MessageContent } from '@langchain/core/messages'
 import type { Chat } from './Chat.js'
 import type { ChatProvider } from './ChatProvider.js'
+import { ZodObject } from 'zod'
 
 export class ChatClient implements Chat {
   private provider: ChatProvider
@@ -11,12 +12,19 @@ export class ChatClient implements Chat {
     this.provider = provider
   }
 
+  private sleep(ms: number) {
+    return new Promise((resolve) => setTimeout(resolve, ms))
+  }
+
   async invoke(prompt: string): Promise<MessageContent> {
     return await this.provider.invoke(prompt)
   }
 
-  sleep(ms: number) {
-    return new Promise((resolve) => setTimeout(resolve, ms))
+  async invokeWithStructuredOutput(
+    prompt: string,
+    zodObject: ZodObject<any>,
+  ): Promise<{ [p: string]: any }> {
+    return await this.provider.invokeWithStructuredOutput(prompt, zodObject)
   }
 
   async streamToStdout(prompt: string): Promise<void> {

@@ -3,7 +3,9 @@
 import type { MessageContent } from '@langchain/core/messages'
 import { ChatOpenAI } from '@langchain/openai'
 import type { ChatProvider } from './ChatProvider.js'
+
 import logger from '../logger.js'
+import { ZodObject } from 'zod'
 
 export interface OpenAIConfig {
   model: string
@@ -33,6 +35,14 @@ export class OpenAIProvider implements ChatProvider {
   async invoke(prompt: string): Promise<MessageContent> {
     const response = await this.chat.invoke(prompt)
     return response.content
+  }
+
+  async invokeWithStructuredOutput(
+    prompt: string,
+    zodObject: ZodObject<any>,
+  ): Promise<{ [p: string]: any }> {
+    const structuredLlm = this.chat.withStructuredOutput(zodObject)
+    return await structuredLlm.invoke(prompt)
   }
 
   async *stream(prompt: string): AsyncIterable<{ content: string }> {

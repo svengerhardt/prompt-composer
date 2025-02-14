@@ -4,6 +4,7 @@ import type { MessageContent } from '@langchain/core/messages'
 import { ChatOllama } from '@langchain/ollama'
 import type { ChatProvider } from './ChatProvider.js'
 import logger from '../logger.js'
+import { ZodObject } from 'zod'
 
 export interface OllamaConfig {
   model: string
@@ -36,6 +37,14 @@ export class OllamaProvider implements ChatProvider {
   async invoke(prompt: string): Promise<MessageContent> {
     const response = await this.chat.invoke(prompt)
     return response.content
+  }
+
+  async invokeWithStructuredOutput(
+    prompt: string,
+    zodObject: ZodObject<any>,
+  ): Promise<{ [p: string]: any }> {
+    const structuredLlm = this.chat.withStructuredOutput(zodObject)
+    return await structuredLlm.invoke(prompt)
   }
 
   async *stream(prompt: string): AsyncIterable<{ content: string }> {
