@@ -55,7 +55,7 @@ async function chatExample(prompt: string) {
 **Structured Output**
 
 ```typescript
-import { z } from "zod";
+import { z } from 'zod';
 import { ChatClient, OpenAIProvider } from 'prompt-composer';
 
 async function chatExample(prompt: string) {
@@ -64,9 +64,9 @@ async function chatExample(prompt: string) {
   }));
   
   const joke = z.object({
-    setup: z.string().describe("The setup of the joke"),
-    punchline: z.string().describe("The punchline to the joke"),
-    rating: z.number().optional().describe("How funny the joke is, from 1 to 10"),
+    setup: z.string().describe('The setup of the joke'),
+    punchline: z.string().describe('The punchline to the joke'),
+    rating: z.number().optional().describe('How funny the joke is, from 1 to 10'),
   });
   
   let result = await chatClient.invokeWithStructuredOutput(prompt, joke);
@@ -182,6 +182,63 @@ promptComposer.addComponent(new FileReaderComponent({
 }))
 ```
 
+### OHLCVComponent
+
+The `OHLCVComponent` is a prompt component that retrieves historical market data (OHLCV: Open, High, Low, Close, Volume) from a cryptocurrency exchange using the ccxt library.
+
+**Example:**
+
+```typescript
+promptComposer.addComponent(new OHLCVComponent({
+    exchange: 'binance',
+    symbol: 'BTC/USDT', 
+    timeframe: '1d', 
+    limit: 30
+}))
+```
+**Configuration:**  
+
+The component is configured with parameters such as:
+
+- `exchange`: The exchange name (e.g., binance).
+- `symbol`: The trading pair (e.g., BTC/USDT).
+- `timeframe`: The interval for each candle (e.g., 1d).
+- `since`: An optional starting timestamp (in milliseconds) for fetching data.
+- `limit`: The maximum number of candles to fetch.
+
+### FearGreedComponent
+
+The `FearGreedComponent` is a prompt component that retrieves comprehensive market sentiment data based on the Fear and Greed index from a CNN data API. It formats a provided date to construct the correct API endpoint URL, fetches the sentiment data, and returns it as a JSON string.
+
+**Example:**
+
+```typescript
+promptComposer.addComponent(new FearGreedComponent())
+```
+
+### FreqtradeComponent
+
+The `FreqtradeComponent` is a prompt component designed to process and format historical market data for a specific trading pair and timeframe. It implements the `PromptComponent` interface, transforming raw market data into a structured JSON format that can be used in dynamic prompts.
+
+**Example:**
+
+```typescript
+promptComposer.addComponent(new FreqtradeComponent(req.body))
+```
+
+**Data Transformation:**
+
+The component takes in a raw data object (referred to as `body`) and processes it using the `transformBody` method. This method extracts key information such as:
+
+- **Runmode:** The operational mode.
+- **Timeframe:** The interval for each data candle.
+- **Pair:** The trading pair, derived from the `metadata` of the input.
+- **Candles:** An array of market data entries where each candle includes:
+  - `date`: The timestamp.
+  - `open`, `high`, `low`, `close`: Price information.
+  - `volume`: The traded volume.
+  - Additional optional fields
+
 ## Creating a New Prompt Component
 
 There are two common approaches to creating a new Prompt Component:
@@ -191,7 +248,7 @@ There are two common approaches to creating a new Prompt Component:
 If you need a fully custom component that doesn’t require the built-in template interpolation or shared configuration handling, you can implement the PromptComponent interface directly.
 
 ```typescript
-import {PromptComponent} from "prompt-composer";
+import {PromptComponent} from 'prompt-composer';
 
 export class CustomComponent implements PromptComponent {
   // Custom properties and constructor as needed
@@ -213,7 +270,7 @@ export class CustomComponent implements PromptComponent {
 For most cases, extending BasePromptComponent is recommended. This approach leverages the built-in support for configuration management and template interpolation, reducing boilerplate code.
 
 ```typescript
-import {BasePromptComponent} from "prompt-composer";
+import {BasePromptComponent} from 'prompt-composer';
 
 interface MyComponentConfig {
   description: string;
