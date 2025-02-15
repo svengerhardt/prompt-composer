@@ -1,35 +1,25 @@
 'use strict'
 
 import type { MessageContent } from '@langchain/core/messages'
-import { ChatOpenAI } from '@langchain/openai'
+import { ChatOpenAI, type ChatOpenAIFields } from '@langchain/openai'
 import type { ChatProvider } from './ChatProvider.js'
 
 import logger from '../logger.js'
 import { ZodObject } from 'zod'
 
-export interface OpenAIConfig {
-  model: string
-  temperature: number
-}
-
-const defaultConfig: OpenAIConfig = {
+const defaultConfig: ChatOpenAIFields = {
   model: 'gpt-4o-mini',
   temperature: 0,
 }
 
 export class OpenAIProvider implements ChatProvider {
-  private config: OpenAIConfig
+  private config: ChatOpenAIFields
   private chat: ChatOpenAI
 
-  constructor(config: Partial<OpenAIConfig> = {}) {
+  constructor(config: Partial<ChatOpenAIFields> = {}) {
     this.config = { ...defaultConfig, ...config }
-    logger.info(
-      `OpenAIProvider.invoke: model=${this.config.model}, temperature=${this.config.temperature}`,
-    )
-    this.chat = new ChatOpenAI({
-      model: this.config.model,
-      temperature: this.config.temperature,
-    })
+    logger.info(`OpenAIProvider.invoke: config=${JSON.stringify(this.config)}`)
+    this.chat = new ChatOpenAI(this.config)
   }
 
   async invoke(prompt: string): Promise<MessageContent> {
