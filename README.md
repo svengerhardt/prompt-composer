@@ -54,6 +54,33 @@ async function chatExample(prompt: string) {
 
 **Structured Output**
 
+Ollama example:
+
+```typescript
+import { z } from 'zod';
+import { zodToJsonSchema } from "zod-to-json-schema";
+import { ChatClient, OllamaProvider } from 'prompt-composer';
+
+async function chatExample(prompt: string) {
+  const joke = z.object({
+    setup: z.string().describe('The setup of the joke'),
+    punchline: z.string().describe('The punchline to the joke'),
+    rating: z.number().optional().describe('How funny the joke is, from 1 to 10'),
+  });
+  const chatClient = new ChatClient(new OllamaProvider({
+    model: 'qwen2.5:latest',
+    format: zodToJsonSchema(joke),
+  }));
+  
+  let result = await chatClient.invoke(prompt);
+  console.log(result);
+}
+
+// chatExample('Tell me a joke about cats');
+```
+
+OpenAI example:
+
 ```typescript
 import { z } from 'zod';
 import { ChatClient, OpenAIProvider } from 'prompt-composer';
