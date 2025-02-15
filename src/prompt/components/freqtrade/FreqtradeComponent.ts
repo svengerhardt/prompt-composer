@@ -32,7 +32,7 @@ export class FreqtradeComponent implements PromptComponent {
   }
 
   getDescription(): string {
-    return `Historical market data with indicators for trading pair ${this.pair} and timeframe ${this.timeframe}:`
+    return `Historical market data for trading pair ${this.pair} and timeframe ${this.timeframe}:`
   }
 
   async getContent(): Promise<string> {
