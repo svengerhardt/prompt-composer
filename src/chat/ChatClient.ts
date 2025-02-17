@@ -1,5 +1,3 @@
-'use strict'
-
 import type { MessageContent } from '@langchain/core/messages'
 import type { Chat } from './Chat.js'
 import type { ChatProvider } from './ChatProvider.js'

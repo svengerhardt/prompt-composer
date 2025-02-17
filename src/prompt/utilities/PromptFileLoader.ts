@@ -1,9 +1,7 @@
-'use strict'
-
-import { promises as fs } from 'fs'
+import { readFileSync } from 'fs'
 
 export class PromptFileLoader {
-  async loadPrompt(path: string): Promise<string> {
-    return await fs.readFile(path, 'utf8')
+  static loadPrompt(path: string): string {
+    return readFileSync(path, 'utf8')
   }
 }

@@ -1,5 +1,3 @@
-'use strict'
-
 import { BasePromptComponent } from '../BasePromptComponent.js'
 import logger from '../../../logger.js'
 

@@ -1,5 +1,3 @@
-'use strict'
-
 import Parser from 'rss-parser'
 import striptags from 'striptags'
 import { BasePromptComponent } from '../BasePromptComponent.js'

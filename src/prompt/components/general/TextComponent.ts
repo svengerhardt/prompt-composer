@@ -1,5 +1,3 @@
-'use strict'
-
 import { BasePromptComponent } from '../BasePromptComponent.js'
 
 interface TextComponentConfig {

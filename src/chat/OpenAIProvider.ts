@@ -1,5 +1,3 @@
-'use strict'
-
 import type { MessageContent } from '@langchain/core/messages'
 import { ChatOpenAI, type ChatOpenAIFields } from '@langchain/openai'
 import type { ChatProvider } from './ChatProvider.js'
@@ -18,7 +16,7 @@ export class OpenAIProvider implements ChatProvider {
 
   constructor(config: Partial<ChatOpenAIFields> = {}) {
     this.config = { ...defaultConfig, ...config }
-    logger.info(`OpenAIProvider.invoke: config=${JSON.stringify(this.config)}`)
+    logger.info(`OpenAIProvider config=${JSON.stringify(this.config)}`)
     this.chat = new ChatOpenAI(this.config)
   }
 

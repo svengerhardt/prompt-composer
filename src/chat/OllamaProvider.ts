@@ -1,5 +1,3 @@
-'use strict'
-
 import type { MessageContent } from '@langchain/core/messages'
 import { ChatOllama, type ChatOllamaInput } from '@langchain/ollama'
 import type { ChatProvider } from './ChatProvider.js'
@@ -18,7 +16,7 @@ export class OllamaProvider implements ChatProvider {
 
   constructor(config: Partial<ChatOllamaInput> = {}) {
     this.config = { ...defaultConfig, ...config }
-    logger.info(`OllamaProvider.invoke: config=${JSON.stringify(this.config)}`)
+    logger.info(`OllamaProvider config=${JSON.stringify(this.config)}`)
     this.chat = new ChatOllama(this.config)
   }
 

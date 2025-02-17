@@ -1,5 +1,3 @@
-'use strict'
-
 import { ZodObject } from 'zod'
 import type { MessageContent } from '@langchain/core/messages'
 

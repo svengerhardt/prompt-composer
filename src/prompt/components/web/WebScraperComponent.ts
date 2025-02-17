@@ -1,5 +1,3 @@
-'use strict'
-
 import axios from 'axios'
 import * as cheerio from 'cheerio'
 import { BasePromptComponent } from '../BasePromptComponent.js'

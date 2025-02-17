@@ -1,5 +1,3 @@
-'use strict'
-
 import { promises as fs } from 'fs'
 import { BasePromptComponent } from '../BasePromptComponent.js'
 import logger from '../../../logger.js'

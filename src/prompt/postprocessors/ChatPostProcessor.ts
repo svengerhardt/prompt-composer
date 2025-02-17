@@ -1,5 +1,3 @@
-'use strict'
-
 import type { PostProcessor } from './PostProcessor.js'
 import type { ChatProvider } from '../../chat/ChatProvider.js'
 import { ChatClient } from '../../chat/ChatClient.js'

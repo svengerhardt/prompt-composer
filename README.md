@@ -103,7 +103,7 @@ async function chatExample(prompt: string) {
 // chatExample('Tell me a joke about cats');
 ```
 
-Result
+Result:
 
 ```json
 {

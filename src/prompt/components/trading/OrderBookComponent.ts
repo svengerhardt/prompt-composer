@@ -1,5 +1,3 @@
-'use strict'
-
 import ccxt, { type int } from 'ccxt'
 import { BasePromptComponent } from '../BasePromptComponent.js'
 import logger from '../../../logger.js'
