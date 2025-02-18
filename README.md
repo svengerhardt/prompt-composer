@@ -209,7 +209,7 @@ promptComposer.addComponent(new FileReaderComponent({
 }))
 ```
 
-### OHLCVComponent
+### OHLCV Data
 
 The `OHLCVComponent` is a prompt component that retrieves historical market data (OHLCV: Open, High, Low, Close, Volume) from a cryptocurrency exchange using the ccxt library.
 
@@ -233,7 +233,7 @@ The component is configured with parameters such as:
 - `since`: An optional starting timestamp (in milliseconds) for fetching data.
 - `limit`: The maximum number of candles to fetch.
 
-### FearGreedComponent
+### Fear And Greed
 
 The `FearGreedComponent` is a prompt component that retrieves comprehensive market sentiment data based on the Fear and Greed index from a CNN data API. It formats a provided date to construct the correct API endpoint URL, fetches the sentiment data, and returns it as a JSON string.
 
@@ -243,7 +243,7 @@ The `FearGreedComponent` is a prompt component that retrieves comprehensive mark
 promptComposer.addComponent(new FearGreedComponent())
 ```
 
-### AlphaVantageComponent
+### Alpha Vantage
 
 The `AlphaVantageComponent` is a prompt component designed to interact with the Alpha Vantage API. The Alpha Vantage API key is retrieved from the environment variable `ALPHA_VANTAGE_API_KEY`
 
@@ -260,7 +260,7 @@ promptComposer.addComponent(new AlphaVantageComponent({
 
 A complete documentation of the Alpha Vantage API can be found [`here`](https://www.alphavantage.co/documentation/) 
 
-### FreqtradeComponent
+### Freqtrade
 
 The `FreqtradeComponent` is a prompt component designed to process and format historical market data for a specific trading pair and timeframe. It implements the `PromptComponent` interface, transforming raw market data into a structured JSON format that can be used in dynamic prompts.
 
