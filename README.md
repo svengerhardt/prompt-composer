@@ -1,6 +1,6 @@
 # Prompt Composer
 
-Construct dynamic and context-rich prompts for large language models (LLMs).
+Construct dynamic prompts for large language models (LLMs).
 
 ## Usage
 
@@ -242,6 +242,23 @@ The `FearGreedComponent` is a prompt component that retrieves comprehensive mark
 ```typescript
 promptComposer.addComponent(new FearGreedComponent())
 ```
+
+### AlphaVantageComponent
+
+The `AlphaVantageComponent` is a prompt component designed to interact with the Alpha Vantage API. The Alpha Vantage API key is retrieved from the environment variable `ALPHA_VANTAGE_API_KEY`
+
+**Example:**
+
+```typescript
+promptComposer.addComponent(new AlphaVantageComponent({
+  params: {
+    "function": "NEWS_SENTIMENT",
+    "tickers": "AAPL"
+  }
+}))
+```
+
+A complete documentation of the Alpha Vantage API can be found [`here`](https://www.alphavantage.co/documentation/) 
 
 ### FreqtradeComponent
 
