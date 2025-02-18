@@ -1,4 +1,4 @@
- import type { MessageContent } from '@langchain/core/messages'
+import type { MessageContent } from '@langchain/core/messages'
 
 export enum ChatType {
   Ollama = 'Ollama',
