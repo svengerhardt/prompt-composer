@@ -11,26 +11,28 @@ interface Candle {
 }
 
 interface TransformedBody {
-  runmode: string
+  exchange: string,
   timeframe: string
   pair: string
   candles: Candle[]
 }
 
 export class FreqtradeComponent implements PromptComponent {
+  private readonly exchange: string
   private readonly pair: string
   private readonly timeframe: string
   private readonly candles: Candle[]
 
   constructor(body: any) {
     const transformedBody = this.transformBody(body)
+    this.exchange = transformedBody.exchange
     this.pair = transformedBody.pair
     this.timeframe = transformedBody.timeframe
     this.candles = transformedBody.candles
   }
 
   getDescription(): string {
-    return `Historical market data for trading pair ${this.pair} and timeframe ${this.timeframe}:`
+    return `Historical market data from ${this.exchange} for trading pair ${this.pair} and timeframe ${this.timeframe}`
   }
 
   async getContent(): Promise<string> {
@@ -38,9 +40,9 @@ export class FreqtradeComponent implements PromptComponent {
   }
 
   transformBody(body: any): TransformedBody {
-    const { runmode, timeframe, metadata, candles } = body
+    const { exchange, timeframe, metadata, candles } = body
     return {
-      runmode,
+      exchange,
       timeframe,
       pair: metadata.pair,
       candles: candles.map((candle: any): Candle => {
