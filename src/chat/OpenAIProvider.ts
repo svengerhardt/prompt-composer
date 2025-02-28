@@ -16,7 +16,7 @@ export class OpenAIProvider implements ChatProvider {
 
   constructor(config: Partial<ChatOpenAIFields> = {}) {
     this.config = { ...defaultConfig, ...config }
-    logger.info(`OpenAIProvider config=${JSON.stringify(this.config)}`)
+    logger.debug(`OpenAIProvider config=${JSON.stringify(this.config)}`)
     this.chat = new ChatOpenAI(this.config)
   }
 

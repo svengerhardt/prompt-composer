@@ -16,7 +16,7 @@ export class OllamaProvider implements ChatProvider {
 
   constructor(config: Partial<ChatOllamaInput> = {}) {
     this.config = { ...defaultConfig, ...config }
-    logger.info(`OllamaProvider config=${JSON.stringify(this.config)}`)
+    logger.debug(`OllamaProvider config=${JSON.stringify(this.config)}`)
     this.chat = new ChatOllama(this.config)
   }
 
