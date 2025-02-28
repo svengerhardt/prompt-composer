@@ -260,6 +260,37 @@ promptComposer.addComponent(new AlphaVantageComponent({
 
 A complete documentation of the Alpha Vantage API can be found [`here`](https://www.alphavantage.co/documentation/) 
 
+### MongoDB
+
+The `MongoComponent` provides a generic, read-only interface for connecting to a MongoDB database, performing queries, and retrieving data.
+
+**Configuration:**
+
+The component is configured with parameters such as:
+
+- `uri`: The MongoDB connection URI.
+- `dbName`: The name of the database to use.
+- `collectionName`: The name of the collection to query.
+- `query`: A MongoDB query object to filter the documents.
+- `projection`: A projection object to specify which fields to return.
+
+
+**Example:**
+
+```typescript
+promptComposer.addComponent(new MongoComponent({
+  uri: 'mongodb://user:pass@localhost:27017',
+  dbName: 'finance',
+  collectionName: 'news',
+  query: {
+    timestamp: { $gte: 1739833200, $lte: 1739833300 }
+    keywords: { $in: ['xrp'] }
+  },
+  projection: { _id: 0, content: 1 }
+}))
+```
+
+
 ### Freqtrade
 
 The `FreqtradeComponent` is a prompt component designed to process and format historical market data for a specific trading pair and timeframe. It implements the `PromptComponent` interface, transforming raw market data into a structured JSON format that can be used in dynamic prompts.
