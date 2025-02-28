@@ -16,9 +16,12 @@ export * from './prompt/components/trading/FearGreedComponent.js'
 export * from './prompt/components/trading/OrderBookComponent.js'
 export * from './prompt/components/web/RSSFeedComponent.js'
 export * from './prompt/components/web/WebScraperComponent.js'
+export * from './prompt/components/database/MongoComponent.js'
+export * from './prompt/components/rest/RestJWTComponent.js'
 
 export * from './prompt/decorators/ContentPostProcessor.js'
 export * from './prompt/postprocessors/ChatPostProcessor.js'
+export * from './prompt/postprocessors/ProjectionPostProcessor.js'
 
 export * from './prompt/utilities/PromptFileLoader.js'
 export * from './prompt/utilities/PromptLoader.js'
