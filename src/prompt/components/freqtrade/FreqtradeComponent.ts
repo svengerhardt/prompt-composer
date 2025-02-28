@@ -11,7 +11,7 @@ interface Candle {
 }
 
 interface TransformedBody {
-  exchange: string,
+  exchange: string
   timeframe: string
   pair: string
   candles: Candle[]
