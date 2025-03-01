@@ -113,25 +113,6 @@ Result:
 }
 ```
 
-### Content Post Processing
-
-The `ContentPostProcessor` allows you to modify or transform the content of an existing prompt component after it has been generated.
-
-```typescript
-promptComposer.addComponent(new ContentPostProcessor(
-    new FileReaderComponent({
-        path: '../resources/long.txt'
-    }),
-    new ChatPostProcessor(
-        'Summarize the text',
-        new OpenAIProvider({
-            model: 'gpt-4o-mini',
-            temperature: 0,
-        })
-    )
-))
-```
-
 ## Prompt Components Overview
 
 Prompt Components are modular building blocks designed to generate parts of a prompt for a large language model (LLM). They allow you to encapsulate various sources of content—such as file data, web-scraped text, RSS feeds, or even post-processed content—and include a description along with the content itself. This modular design makes it easy to compose dynamic and context-rich prompts.
@@ -313,6 +294,63 @@ The component takes in a raw data object (referred to as `body`) and processes i
   - `open`, `high`, `low`, `close`: Price information.
   - `volume`: The traded volume.
   - Additional optional fields
+
+## Content Post Processing
+
+The `ContentPostProcessor` allows you to modify or transform the content of an existing prompt component after it has been generated.
+
+### Chat Post Processor
+
+The `ChatPostProcessor` modifies the content using chat-based processing mechanism.
+
+The component accepts two parameters:
+
+- `prompt`: The prompt text
+- `provider`: The chat provider to process the content
+
+**Example:**
+
+```typescript
+promptComposer.addComponent(new ContentPostProcessor(
+  new RSSFeedComponent({
+    feedUrl: 'https://news.bitcoin.com/feed/', 
+    limit: 10,
+  }), 
+  new ChatPostProcessor(
+    'Please summarize the text from the "content" field', 
+    new OllamaProvider({
+      model: 'qwen2.5:latest'
+    })
+  )
+))
+```
+
+### Projection Post Processor
+
+The `ProjectionPostProcessor` extracts an array from a JSON string and then filters each object in this array according to a specified structure.
+
+The component accepts two parameters:
+
+- `projection`: Projection blueprint for selecting keys from objects
+- `limit`: An optional parameter that restricts the number of items in the final result.
+
+**Example:**
+
+```typescript
+promptComposer.addComponent(new ContentPostProcessor(
+  new OHLCVComponent({
+    symbol: 'BTC/USDT',
+    timeframe: '1m',
+    limit: 30
+  }),
+  new ProjectionPostProcessor({
+    date: true,
+    open: true,
+    close: true,
+    volume: true,
+  })
+))
+```
 
 ## Creating a New Prompt Component
 
