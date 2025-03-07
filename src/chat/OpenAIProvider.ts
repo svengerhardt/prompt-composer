@@ -7,7 +7,6 @@ import { ZodObject } from 'zod'
 
 const defaultConfig: ChatOpenAIFields = {
   model: 'gpt-4o-mini',
-  temperature: 0,
 }
 
 export class OpenAIProvider implements ChatProvider {

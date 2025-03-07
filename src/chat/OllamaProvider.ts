@@ -6,8 +6,7 @@ import { ZodObject } from 'zod'
 
 const defaultConfig: ChatOllamaInput = {
   model: 'qwen2.5:latest',
-  temperature: 0,
-  numCtx: 8192,
+  numCtx: 4096,
 }
 
 export class OllamaProvider implements ChatProvider {
