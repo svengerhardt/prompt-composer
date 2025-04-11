@@ -19,10 +19,11 @@
   "license": "MIT",
   "description": "",
   "dependencies": {
+    "@ixjb94/indicators": "^1.2.4",
     "@langchain/core": "^0.3.30",
     "@langchain/ollama": "^0.1.4",
     "@langchain/openai": "^0.3.17",
-    "axios": "^1.7.9",
+    "axios": "^1.8.4",
     "ccxt": "^4.4.50",
     "cheerio": "^1.0.0",
     "mongodb": "^6.13.0",
