@@ -172,6 +172,9 @@ export class OHLCV2Component extends BasePromptComponent<OHLCV2ComponentConfig> 
         }
       }
 
+      // Function for rounding to a maximum of 2 decimal places
+      const round = (num: number): number => Number(num.toFixed(2))
+
       // Structure of the indicator array using the global offset
       // Each entry corresponds to the candle timestamp: candles[i + globalOffset]
       for (let i = 0; i < validLength; i++) {
@@ -180,24 +183,33 @@ export class OHLCV2Component extends BasePromptComponent<OHLCV2ComponentConfig> 
         if (computedIndicators['sma']) {
           const smaIndex =
             i + (globalOffset - computedIndicators['sma']!.offset)
-          indicatorEntry.sma = computedIndicators['sma']!.values[smaIndex]
+          const smaValue = computedIndicators['sma'].values[smaIndex]
+          indicatorEntry.sma =
+            smaValue !== undefined ? round(smaValue) : undefined
         }
         if (computedIndicators['ema']) {
           const emaIndex =
             i + (globalOffset - computedIndicators['ema']!.offset)
-          indicatorEntry.ema = computedIndicators['ema']!.values[emaIndex]
+          const emaValue = computedIndicators['ema'].values[emaIndex]
+          indicatorEntry.ema =
+            emaValue !== undefined ? round(emaValue) : undefined
         }
         if (computedIndicators['rsi']) {
           const rsiIndex =
             i + (globalOffset - computedIndicators['rsi']!.offset)
-          indicatorEntry.rsi = computedIndicators['rsi']!.values[rsiIndex]
+          const rsiValue = computedIndicators['rsi'].values[rsiIndex]
+          indicatorEntry.rsi =
+            rsiValue !== undefined ? round(rsiValue) : undefined
         }
         if (computedMACD) {
           const macdIndex = i + (globalOffset - computedMACD.offset)
+          const macdValue = computedMACD.macd[macdIndex]
+          const signalValue = computedMACD.signal[macdIndex]
+          const histValue = computedMACD.hist[macdIndex]
           indicatorEntry.macd = {
-            macd: computedMACD.macd[macdIndex],
-            signal: computedMACD.signal[macdIndex],
-            hist: computedMACD.hist[macdIndex],
+            macd: macdValue !== undefined ? round(macdValue) : undefined,
+            signal: signalValue !== undefined ? round(signalValue) : undefined,
+            hist: histValue !== undefined ? round(histValue) : undefined,
           }
         }
         indicatorsOutput.push(indicatorEntry)
@@ -234,4 +246,3 @@ export class OHLCV2Component extends BasePromptComponent<OHLCV2ComponentConfig> 
     }
   }
 }
-
