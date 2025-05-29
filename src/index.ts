@@ -23,6 +23,7 @@ export * from './prompt/components/rest/RestJWTComponent.js'
 export * from './prompt/decorators/ContentPostProcessor.js'
 export * from './prompt/postprocessors/ChatPostProcessor.js'
 export * from './prompt/postprocessors/ProjectionPostProcessor.js'
+export * from './prompt/postprocessors/PlaceholderPostProcessor.js'
 
 export * from './prompt/utilities/PromptFileLoader.js'
 export * from './prompt/utilities/PromptLoader.js'
