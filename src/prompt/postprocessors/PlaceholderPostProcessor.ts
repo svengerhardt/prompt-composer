@@ -8,14 +8,14 @@ type PlaceholderMap = Record<string, PlaceholderValue>
  * with corresponding values from a provided placeholder map.
  */
 export class PlaceholderPostProcessor implements PostProcessor {
-  private readonly placeholder: PlaceholderMap
+  private readonly placeholderMap: PlaceholderMap
 
   /**
    * Creates a new instance of the PlaceholderPostProcessor.
-   * @param placeholder - A map of placeholder keys and their corresponding replacement values.
+   * @param placeholderMap - A map of placeholder keys and their corresponding replacement values.
    */
-  constructor(placeholder: PlaceholderMap) {
-    this.placeholder = placeholder
+  constructor(placeholderMap: PlaceholderMap) {
+    this.placeholderMap = placeholderMap
   }
 
   /**
@@ -27,7 +27,7 @@ export class PlaceholderPostProcessor implements PostProcessor {
    */
   async postProcessContent(content: string): Promise<string> {
     return content.replace(/{{\s*(\w+)\s*}}/g, (_, key) => {
-      const value = this.placeholder[key]
+      const value = this.placeholderMap[key]
       return value != null ? String(value) : `{{${key}}}`
     })
   }

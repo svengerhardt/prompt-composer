@@ -352,6 +352,28 @@ promptComposer.addComponent(new ContentPostProcessor(
 ))
 ```
 
+### Placeholder Post Processor
+
+The `PlaceholderPostProcessor` replaces placeholders in the format {{key}} with corresponding values from a provided placeholder map.
+
+The component accepts one parameter:
+
+- `placeholderMap`: A map of placeholder keys and their corresponding replacement values.
+
+**Example:**
+
+```typescript
+promptComposer.addComponent(new ContentPostProcessor(
+  new TextComponent({
+    content: 'Hello my name is {{name}}. I am {{age}} old.'
+  }),
+  new PlaceholderPostProcessor({
+    name: "Hans",
+    age: 37,
+  })
+))
+```
+
 ## Creating a New Prompt Component
 
 There are two common approaches to creating a new Prompt Component:
